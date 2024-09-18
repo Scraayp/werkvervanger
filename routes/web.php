@@ -15,3 +15,12 @@ Route::get('/about', function () {
 Route::get('/login', function () {
     return view('login');
 })->name('auth.login');
+
+Route::get('/register', function () {
+    return view('register');
+})->name('auth.register');
+
+Route::get('/forget-password', function () {
+    return view('forget-password');
+})->name('auth.forget-password');
+
