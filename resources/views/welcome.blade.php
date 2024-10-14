@@ -22,6 +22,8 @@
 </head>
 
 <body class="font-sans antialiased bg-white dark:bg-slate-900 text-gray-700 dark:text-white">
+    {{--Navbar--}}
+    @include('components.nav')
     @include('components.hero')
     {{-- Flowbite --}}
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
