@@ -12,8 +12,10 @@ Route::get('/services', function () {
     return view('services');
 })->name('services');
 
-Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
-Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact.show');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
