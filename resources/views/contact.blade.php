@@ -1,81 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Laravel</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        [x-cloak] {
-            display: none !important;
-        }
-    </style>
+
+    {{-- Flowbite --}}
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet"/>
+
+    {{-- Fontawesome --}}
+    <script src="https://kit.fontawesome.com/7bcbbd58a8.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="min-h-screen bg-gray-100 flex items-center justify-center p-4 transition-colors duration-200"
-    x-data="{ darkMode: false }" :class="{ 'dark bg-gray-900': darkMode }">
-    <div
-        class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-4xl flex flex-col md:flex-row transition-colors duration-200">
-        <div class="md:w-1/2 mb-8 md:mb-0 md:mr-8 flex items-center justify-center">
-            <svg class="w-full h-auto max-w-sm" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M287.163 62.5C252.163 37.5 209.163 25 164.163 25C74.1629 25 1.16293 98 1.16293 188C1.16293 278 74.1629 351 164.163 351C254.163 351 327.163 278 327.163 188"
-                    :stroke="darkMode ? '#4B5563' : '#3B82F6'" stroke-width="8" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                <path d="M327.163 62V188" :stroke="darkMode ? '#4B5563' : '#3B82F6'" stroke-width="8"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M264.163 125H364.163" :stroke="darkMode ? '#4B5563' : '#3B82F6'" stroke-width="8"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                <circle cx="164.163" cy="188" r="75" :stroke="darkMode ? '#9CA3AF' : '#60A5FA'"
-                    stroke-width="8" />
-                <path d="M164.163 163V213" :stroke="darkMode ? '#9CA3AF' : '#60A5FA'" stroke-width="8"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M189.163 188H139.163" :stroke="darkMode ? '#9CA3AF' : '#60A5FA'" stroke-width="8"
-                    stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-        </div>
-        <div class="md:w-1/2">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-3xl font-bold text-gray-800 dark:text-white">Contact Us</h2>
+<body class="font-sans antialiased bg-white dark:bg-slate-900 text-gray-700 dark:text-white">
+{{-- Navbar --}}
+@include('components.nav')
 
-            </div>
-            @if (session('success'))
-                <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-                    {{ session('success') }}
-                </div>
-            @endif
-            <form action="{{ route('contact.submit') }}" method="POST" class="space-y-6">
-                @csrf
-                <div>
-                    <label for="name" class="text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Your name" required
-                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
-                </div>
-                <div>
-                    <label for="email" class="text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
-                    <input type="email" id="email" name="email" placeholder="your@email.com" required
-                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
-                </div>
-                <div>
-                    <label for="subject" class="text-sm font-medium text-gray-700 dark:text-gray-300">Subject</label>
-                    <input type="text" id="subject" name="subject" placeholder="Subject" required
-                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
-                </div>
-                <div>
-                    <label for="message" class="text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
-                    <textarea id="message" name="message" placeholder="Your message" required rows="4"
-                        class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"></textarea>
-                </div>
-                <button type="submit"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
-                    Send Message
-                </button>
-            </form>
-        </div>
+{{--  Contact form  --}}
+
+
+<form class="max-w-sm mx-auto mt-20">
+    <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+    <div class="flex">
+    <span
+        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+           fill="currentColor" viewBox="0 0 20 20">
+        <path
+            d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
+      </svg>
+    </span>
+        <input type="text" id="website-admin"
+               class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               placeholder="Bonnie Green">
+    </div>
+    <label for="pswd" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+    <div class="flex">
+    <span
+        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+           fill="currentColor" viewBox="0 0 20 20">
+        <path
+            d="M6.5 2a4.5 4.5 0 0 1 4.42 3.5H13a2 2 0 0 1 2 2v1h1a1 1 0 1 1 0 2h-1v1.5h1a1 1 0 1 1 0 2h-1V16a1 1 0 1 1-2 0v-1H9.5a4.5 4.5 0 1 1-3-8ZM6.5 4a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z"/>
+      </svg>
+    </span>
+        <input type="password" id="pswd"
+               class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               placeholder="Password">
     </div>
 
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <div class="mb-5">
+        <label for="repeat-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Repeat
+            password</label>
+        <input type="password" id="repeat-password"
+               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+               required/>
+    </div>
+    <div class="flex items-start mb-5">
+        <div class="flex items-center h-5">
+            <input id="terms" type="checkbox" value=""
+                   class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                   required/>
+        </div>
+        <label for="terms" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a
+                href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a></label>
+    </div>
+    <button type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Register new account
+    </button>
+</form>
+
+{{-- Flowbite --}}
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </body>
+
 
 </html>
